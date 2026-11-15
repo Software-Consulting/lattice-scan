@@ -1,0 +1,36 @@
+[package]
+name = "lattice-scan"
+version = "0.1.0"
+description = "Scan a domain's public TLS certificates: Certificate Transparency discovery, expiry and lifetime, chain trust, key strength, post-quantum key exchange, CAA and HSTS."
+license = "Apache-2.0"
+repository = "https://github.com/Software-Consulting/lattice-scan"
+homepage = "https://latticepki.com"
+keywords = ["tls", "pki", "certificates", "post-quantum", "security"]
+categories = ["command-line-utilities", "cryptography", "network-programming"]
+readme = "README.md"
+edition = "2021"
+rust-version = "1.85"
+
+[lib]
+name = "lattice_scan"
+path = "src/lib.rs"
+
+[[bin]]
+name = "lattice-scan"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock", "serde", "std"] }
+clap = { version = "4", features = ["derive"] }
+futures = "0.3"
+hickory-resolver = "0.24"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json", "gzip"] }
+rustls = { version = "0.23.27", default-features = false, features = ["aws_lc_rs", "std", "tls12", "logging"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time"] }
+tokio-rustls = { version = "0.26", default-features = false, features = ["aws_lc_rs", "tls12"] }
+webpki-roots = "1"
+x509-parser = "0.16"
